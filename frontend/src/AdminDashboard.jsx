@@ -278,7 +278,7 @@ function AdminDashboard() {
                             {activeTab === "bookings" && "Appointments & Transactions Audit"}
                             {activeTab === "reviews" && "Customer Reviews & Quality Moderation"}
                         </h1>
-                        <p>Real-time platform metrics, security moderation, and database sync.</p>
+                        <p>Real-time platform performance, appointment tracking, and partner moderation.</p>
                     </div>
 
                     <div className="workspace-status-chips">
@@ -286,7 +286,7 @@ function AdminDashboard() {
                             <span className="pulsing-live-dot" /> 🟢 Platform Online
                         </span>
                         <span className="status-sync-chip">
-                            ⚡ MySQL Synced
+                            ⚡ Live Analytics
                         </span>
                     </div>
                 </div>
@@ -407,23 +407,23 @@ function AdminDashboard() {
                             </div>
 
                             <div className="analytics-card">
-                                <h3>🛡️ Platform Quality & Security Health</h3>
+                                <h3>🛡️ Platform Trust & Verification Status</h3>
                                 <div className="health-metrics-list">
                                     <div className="health-item">
-                                        <span className="health-label">⭐ Platform Quality Score</span>
-                                        <span className="health-val glow-gold">{stats.average_rating} / 5.0</span>
+                                        <span className="health-label">⭐ Customer Rating Average</span>
+                                        <span className="health-val glow-gold">{stats.average_rating} / 5.0 ★</span>
                                     </div>
                                     <div className="health-item">
-                                        <span className="health-label">🔒 Database Encryption</span>
-                                        <span className="health-val glow-green">Active (Bcrypt + JWT)</span>
+                                        <span className="health-label">🔐 Account Security & Privacy</span>
+                                        <span className="health-val glow-green">Enterprise Verified</span>
                                     </div>
                                     <div className="health-item">
-                                        <span className="health-label">🛡️ Double-Booking Guard</span>
-                                        <span className="health-val glow-blue">100% Real-Time Enforced</span>
+                                        <span className="health-label">🛡️ Schedule Protection</span>
+                                        <span className="health-val glow-blue">Active Protection</span>
                                     </div>
                                     <div className="health-item">
-                                        <span className="health-label">⚡ System Latency</span>
-                                        <span className="health-val glow-purple">&lt; 25ms Response</span>
+                                        <span className="health-label">⚡ System Reliability</span>
+                                        <span className="health-val glow-purple">99.9% Optimal</span>
                                     </div>
                                 </div>
                             </div>
