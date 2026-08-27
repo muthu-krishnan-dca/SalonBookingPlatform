@@ -5350,7 +5350,10 @@ img, svg, video {
 .admin-spandle-layout.liquid-glass-theme.ultra-liquid {
     display: flex;
     min-height: 100vh;
-    background: #04020a;
+    background: 
+        linear-gradient(135deg, rgba(8, 4, 18, 0.88) 0%, rgba(14, 8, 28, 0.82) 50%, rgba(6, 3, 14, 0.92) 100%),
+        url('/luxury-salon-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
     position: relative;
     overflow-x: hidden;
     color: #ffffff;
