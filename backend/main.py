@@ -22,6 +22,11 @@ app = FastAPI(
     version="2.0.0"
 )
 
+from rate_limiter import RateLimiterMiddleware
+
+# Rate Limiter Middleware: Protects endpoints from abuse and brute-force attacks
+app.add_middleware(RateLimiterMiddleware, default_limit=120, window_seconds=60)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
