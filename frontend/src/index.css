@@ -5343,3 +5343,1122 @@ img, svg, video {
         margin-top: 20px;
     }
 }
+
+/* ==========================================================================
+   NEXT-GEN ULTRA HIGH-LEVEL LIQUID GLASS DESIGN SYSTEM (VisionOS & Liquid Glass)
+   ========================================================================== */
+.admin-spandle-layout.liquid-glass-theme.ultra-liquid {
+    display: flex;
+    min-height: 100vh;
+    background: #04020a;
+    position: relative;
+    overflow-x: hidden;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 1. Multi-Layer Fluid Plasma Background Emitters */
+.liquid-plasma-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.liquid-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.65;
+    mix-blend-mode: screen;
+    animation: floatUltraLiquid 12s infinite cubic-bezier(0.4, 0, 0.2, 1) alternate;
+}
+
+.liquid-orb-1 {
+    top: -120px;
+    left: 8%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, #8b5cf6 0%, #4f46e5 50%, transparent 75%);
+    animation-duration: 14s;
+}
+
+.liquid-orb-2 {
+    bottom: -150px;
+    right: 5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f43f5e 0%, #ec4899 45%, #a855f7 70%, transparent 85%);
+    animation-duration: 16s;
+    animation-delay: 2s;
+}
+
+.liquid-orb-3 {
+    top: 30%;
+    right: 20%;
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(circle, #06b6d4 0%, #3b82f6 55%, transparent 80%);
+    animation-duration: 18s;
+    animation-delay: 4s;
+}
+
+.liquid-orb-4 {
+    bottom: 25%;
+    left: 240px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, #10b981 0%, #06b6d4 50%, transparent 75%);
+    animation-duration: 20s;
+    animation-delay: 6s;
+    opacity: 0.45;
+}
+
+.liquid-orb-5 {
+    top: 60%;
+    left: 45%;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, #d946ef 0%, #8b5cf6 60%, transparent 80%);
+    animation-duration: 15s;
+    animation-delay: 8s;
+    opacity: 0.5;
+}
+
+.liquid-wave-layer {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.25), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 90% 100%, rgba(236, 72, 153, 0.2), transparent 70%);
+}
+
+.liquid-refraction-mesh {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+    background-size: 32px 32px;
+    opacity: 0.6;
+}
+
+@keyframes floatUltraLiquid {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.9) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate3d(40px, -35px, 0) scale(1.18) rotate(180deg);
+        opacity: 0.75;
+    }
+    100% {
+        transform: translate3d(-30px, 30px, 0) scale(1.02) rotate(360deg);
+        opacity: 0.6;
+    }
+}
+
+/* 2. Hyper-Realistic Liquid Frosted Glass Sidebar */
+.admin-spandle-sidebar {
+    width: 290px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(14, 9, 28, 0.55);
+    backdrop-filter: blur(40px) saturate(240%) contrast(110%);
+    -webkit-backdrop-filter: blur(40px) saturate(240%) contrast(110%);
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 26px 20px;
+    box-sizing: border-box;
+    z-index: 100;
+    box-shadow: 
+        15px 0 50px rgba(0, 0, 0, 0.75),
+        inset -1.5px 0 2px rgba(255, 255, 255, 0.18);
+    overflow-y: auto;
+}
+
+.admin-brand-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 6px 10px 20px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 18px;
+}
+
+.brand-icon-halo {
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.9) 0%, rgba(168, 85, 247, 0.9) 100%);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 
+        0 10px 28px rgba(236, 72, 153, 0.55),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.6);
+    flex-shrink: 0;
+}
+
+.brand-info h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    background: linear-gradient(135deg, #ffffff 0%, #f472b6 60%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(236, 72, 153, 0.4));
+}
+
+.brand-role-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 900;
+    color: #f472b6;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(244, 114, 182, 0.8);
+}
+
+/* Master Admin Profile Card */
+.admin-profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    box-shadow: 
+        inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.admin-avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.5);
+    flex-shrink: 0;
+}
+
+.admin-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    overflow: hidden;
+}
+
+.admin-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-email {
+    font-size: 11.5px;
+    color: #cbd5e1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Nav Menu */
+.admin-nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.admin-menu-label {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    text-align: left;
+    padding: 0 10px;
+    margin-bottom: 6px;
+}
+
+.admin-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 18px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: #cbd5e1;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+.admin-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateX(4px);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.admin-nav-btn.active {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.4) 0%, rgba(168, 85, 247, 0.3) 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px);
+    color: #ffffff;
+    box-shadow: 
+        0 8px 25px rgba(236, 72, 153, 0.45),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.35);
+}
+
+.nav-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.nav-label {
+    font-size: 14px;
+    font-weight: 800;
+    flex: 1;
+}
+
+.nav-count-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-glow-indicator {
+    width: 4px;
+    height: 20px;
+    border-radius: 2px;
+    background: #ec4899;
+    box-shadow: 0 0 12px #ec4899, 0 0 20px #ec4899;
+}
+
+/* Sidebar Bottom */
+.admin-sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 18px;
+}
+
+.admin-quick-switch-btn {
+    padding: 10px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+.admin-quick-switch-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border-color: rgba(192, 132, 252, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.admin-logout-btn {
+    padding: 10px 16px;
+    border-radius: 16px;
+    background: rgba(239, 68, 68, 0.18);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    backdrop-filter: blur(14px);
+    color: #fca5a5;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+.admin-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.35);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+}
+
+/* 3. Main Workspace with Liquid Specular Sheen */
+.admin-spandle-main {
+    position: relative;
+    z-index: 1;
+    margin-left: 290px;
+    flex: 1;
+    padding: 36px 44px;
+    box-sizing: border-box;
+    width: calc(100% - 290px);
+    max-width: 1380px;
+}
+
+.admin-top-workspace-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.workspace-title-box h1 {
+    margin: 0 0 6px 0;
+    font-size: 27px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+.workspace-title-box p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.workspace-status-chips {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.status-live-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background: rgba(16, 185, 129, 0.2);
+    backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(52, 211, 153, 0.45);
+    color: #34d399;
+    font-size: 12.5px;
+    font-weight: 800;
+    box-shadow: 
+        0 6px 20px rgba(16, 185, 129, 0.25),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.status-sync-chip {
+    padding: 8px 16px;
+    border-radius: 16px;
+    background: rgba(168, 85, 247, 0.2);
+    backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(192, 132, 252, 0.45);
+    color: #c084fc;
+    font-size: 12.5px;
+    font-weight: 800;
+    box-shadow: 
+        0 6px 20px rgba(168, 85, 247, 0.25),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+/* Search Toolbar */
+.admin-search-toolbar {
+    margin-bottom: 24px;
+}
+
+.admin-search-input-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px);
+    border-radius: 20px;
+    padding: 11px 20px;
+    max-width: 460px;
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.admin-search-input-box:focus-within {
+    border-color: rgba(236, 72, 153, 0.5);
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.3),
+        0 10px 30px rgba(236, 72, 153, 0.3);
+}
+
+.admin-search-input-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    width: 100%;
+}
+
+.clear-search-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* =========================================
+   4. Next-Gen Liquid Glass KPI Cards
+   ========================================= */
+.admin-kpi-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+    margin-bottom: 32px;
+}
+
+.spandle-kpi-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(25, 17, 46, 0.6) 0%, rgba(18, 12, 34, 0.5) 100%);
+    backdrop-filter: blur(40px) saturate(240%);
+    -webkit-backdrop-filter: blur(40px) saturate(240%);
+    border-radius: 28px;
+    padding: 26px;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.35),
+        inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prismatic Liquid Shimmer Sweep */
+.spandle-kpi-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s ease;
+}
+
+.spandle-kpi-card:hover::after {
+    left: 200%;
+}
+
+.spandle-kpi-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 
+        0 35px 80px rgba(0, 0, 0, 0.85),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.revenue-theme { border-color: rgba(52, 211, 153, 0.45); }
+.salon-theme { border-color: rgba(192, 132, 252, 0.45); }
+.customer-theme { border-color: rgba(56, 189, 248, 0.45); }
+.booking-theme { border-color: rgba(244, 114, 182, 0.45); }
+
+.revenue-theme:hover { box-shadow: 0 25px 60px rgba(52, 211, 153, 0.35); }
+.salon-theme:hover { box-shadow: 0 25px 60px rgba(192, 132, 252, 0.35); }
+.customer-theme:hover { box-shadow: 0 25px 60px rgba(56, 189, 248, 0.35); }
+.booking-theme:hover { box-shadow: 0 25px 60px rgba(244, 114, 182, 0.35); }
+
+.kpi-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+}
+
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.kpi-title {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #cbd5e1;
+    margin-bottom: 2px;
+}
+
+.kpi-figure {
+    font-size: 30px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.6px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.revenue-theme .kpi-figure { color: #34d399; text-shadow: 0 0 20px rgba(52, 211, 153, 0.6); }
+.salon-theme .kpi-figure { color: #c084fc; text-shadow: 0 0 20px rgba(192, 132, 252, 0.6); }
+.customer-theme .kpi-figure { color: #38bdf8; text-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+.booking-theme .kpi-figure { color: #f472b6; text-shadow: 0 0 20px rgba(244, 114, 182, 0.6); }
+
+.kpi-sub-tag {
+    font-size: 11.5px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* 5. Liquid Glass Analytics Cards */
+.admin-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 22px;
+}
+
+.analytics-card {
+    background: linear-gradient(135deg, rgba(25, 17, 46, 0.6) 0%, rgba(18, 12, 34, 0.5) 100%);
+    backdrop-filter: blur(40px) saturate(240%);
+    -webkit-backdrop-filter: blur(40px) saturate(240%);
+    border-radius: 28px;
+    padding: 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.3);
+}
+
+.analytics-card h3 {
+    margin: 0 0 20px 0;
+    font-size: 19px;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.status-bars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.status-bar-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.status-bar-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    font-weight: 800;
+}
+
+.bar-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-fill.pending { background: linear-gradient(90deg, #fbbf24, #f59e0b); box-shadow: 0 0 12px rgba(251, 191, 36, 0.6); }
+.bar-fill.confirmed { background: linear-gradient(90deg, #818cf8, #6366f1); box-shadow: 0 0 12px rgba(129, 140, 248, 0.6); }
+.bar-fill.completed { background: linear-gradient(90deg, #34d399, #10b981); box-shadow: 0 0 12px rgba(52, 211, 153, 0.6); }
+
+.health-metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.health-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.health-label {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    font-weight: 700;
+}
+
+.health-val {
+    font-size: 13.5px;
+    font-weight: 900;
+}
+
+.glow-gold { color: #fbbf24; text-shadow: 0 0 14px rgba(251, 191, 36, 0.7); }
+.glow-green { color: #34d399; text-shadow: 0 0 14px rgba(52, 211, 153, 0.7); }
+.glow-blue { color: #38bdf8; text-shadow: 0 0 14px rgba(56, 189, 248, 0.7); }
+.glow-purple { color: #c084fc; text-shadow: 0 0 14px rgba(192, 132, 252, 0.7); }
+
+/* 6. Liquid Glass Tables Container */
+.admin-table-card {
+    background: linear-gradient(135deg, rgba(25, 17, 46, 0.6) 0%, rgba(18, 12, 34, 0.5) 100%);
+    backdrop-filter: blur(40px) saturate(240%);
+    -webkit-backdrop-filter: blur(40px) saturate(240%);
+    border-radius: 28px;
+    padding: 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.75),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.3);
+}
+
+.table-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.table-header-row h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.filter-chips-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chip-btn {
+    padding: 7px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(12px);
+    color: #cbd5e1;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.chip-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.chip-btn.active {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 
+        0 6px 20px rgba(236, 72, 153, 0.5),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.admin-table-container {
+    overflow-x: auto;
+}
+
+.spandle-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.spandle-table th {
+    padding: 14px 18px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #94a3b8;
+    letter-spacing: 0.8px;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+
+.spandle-table td {
+    padding: 16px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.2s ease;
+}
+
+.spandle-table tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.user-avatar-tag {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+    flex-shrink: 0;
+}
+
+.user-name {
+    font-weight: 800;
+    color: #ffffff;
+    display: block;
+}
+
+.user-id-sub {
+    font-size: 11.5px;
+    color: #94a3b8;
+}
+
+.user-email-cell { color: #cbd5e1; }
+.user-phone-cell { color: #94a3b8; }
+
+.role-select-pill {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(14px);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.role-select-pill.CUSTOMER { color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); }
+.role-select-pill.SALON_OWNER { color: #c084fc; border-color: rgba(192, 132, 252, 0.4); }
+.role-select-pill.ADMIN { color: #ec4899; border-color: rgba(236, 72, 153, 0.4); }
+
+.table-action-btn.danger {
+    padding: 7px 16px;
+    border-radius: 12px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    backdrop-filter: blur(12px);
+    color: #fca5a5;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.table-action-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.4);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+}
+
+/* 7. Liquid Glass Salons Grid */
+.spandle-salons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 20px;
+}
+
+.spandle-salon-item-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.4),
+        inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.spandle-salon-item-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.salon-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.salon-id-chip {
+    font-size: 11.5px;
+    color: #94a3b8;
+    font-weight: 800;
+}
+
+.verify-badge {
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 800;
+}
+
+.verify-badge.verified {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    box-shadow: 0 2px 10px rgba(52, 211, 153, 0.3);
+}
+
+.verify-badge.pending {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.salon-card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.salon-card-address {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 13.5px;
+}
+
+.salon-card-meta-box {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 12.5px;
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.salon-card-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn-verify {
+    padding: 7px 16px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn-verify.grant {
+    background: rgba(52, 211, 153, 0.2);
+    border: 1px solid rgba(52, 211, 153, 0.45);
+    color: #34d399;
+}
+
+.action-btn-verify.revoke {
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    color: #fbbf24;
+}
+
+.action-btn-delete {
+    padding: 7px 14px;
+    border-radius: 12px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #f87171;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* 8. Reviews Moderation Grid */
+.reviews-moderation-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.review-mod-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 18px 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.review-stars-val {
+    color: #fbbf24;
+    font-size: 16px;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+}
+
+.review-meta-tag {
+    color: #94a3b8;
+    font-size: 12.5px;
+    margin-left: 12px;
+}
+
+.review-comment-text {
+    margin: 8px 0 0 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+/* 9. Ultra Responsive / Mobile for Liquid Glass Admin */
+@media (max-width: 900px) {
+    .admin-spandle-layout {
+        flex-direction: column;
+    }
+
+    .admin-mobile-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(14, 9, 28, 0.8);
+        backdrop-filter: blur(30px);
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        position: sticky;
+        top: 0;
+        z-index: 120;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .admin-hamburger-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .admin-mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .brand-gem { font-size: 20px; }
+    .brand-text { font-size: 17px; font-weight: 900; color: #ffffff; }
+
+    .admin-avatar-small {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .admin-sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        z-index: 130;
+    }
+
+    .admin-spandle-sidebar {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 300px;
+        height: 100vh;
+        z-index: 140;
+        transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .admin-spandle-sidebar.mobile-open {
+        left: 0;
+    }
+
+    .admin-spandle-main {
+        margin-left: 0;
+        width: 100%;
+        padding: 24px 16px;
+    }
+}

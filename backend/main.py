@@ -9,10 +9,18 @@ from auth import hash_password, verify_password, create_access_token
 from routes.salons import router as salon_router
 from routes.bookings import router as booking_router
 from routes.customers import router as customer_router
+from routes.services import router as service_router
+from routes.staff import router as staff_router
+from routes.reviews import router as review_router
+from routes.admin import router as admin_router
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title="GlowSync Salon Booking API",
+    description="Full-featured multi-tenant platform for Customers, Salon Owners, Stylists & Administrators",
+    version="2.0.0"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,6 +33,10 @@ app.add_middleware(
 app.include_router(salon_router)
 app.include_router(booking_router)
 app.include_router(customer_router)
+app.include_router(service_router)
+app.include_router(staff_router)
+app.include_router(review_router)
+app.include_router(admin_router)
 
 def get_db():
     db = SessionLocal()

@@ -8,7 +8,6 @@ function OwnerNavbar() {
     const user = getUser();
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    // Close mobile drawer when route changes
     useEffect(() => {
         setMobileOpen(false);
     }, [location.pathname]);
@@ -16,6 +15,8 @@ function OwnerNavbar() {
     const navItems = [
         { path: "/dashboard", icon: "🏠", label: "Dashboard", sub: "Overview & Stats" },
         { path: "/owner/salon", icon: "💇", label: "My Salon", sub: "Branches & Hours" },
+        { path: "/owner/services", icon: "✨", label: "Services & Pricing", sub: "Catalog & Duration" },
+        { path: "/owner/staff", icon: "💈", label: "Stylists & Staff", sub: "Team & Leave Tracker" },
         { path: "/owner/bookings", icon: "📅", label: "Bookings", sub: "Incoming Requests" },
         { path: "/owner/customers", icon: "👥", label: "Customers", sub: "Client Records" },
         { path: "/owner/profile", icon: "👤", label: "My Profile", sub: "Account Settings" },
@@ -25,7 +26,7 @@ function OwnerNavbar() {
 
     return (
         <>
-            {/* Mobile Top Header with Hamburger Toggle (Only visible on small screens) */}
+            {/* Mobile Top Header with Hamburger Toggle */}
             <header className="owner-mobile-topbar">
                 <button
                     className="owner-hamburger-btn"
@@ -54,9 +55,9 @@ function OwnerNavbar() {
                 />
             )}
 
-            {/* Main Left Sidebar (Fixed on Desktop, Drawer on Mobile) */}
+            {/* Main Left Sidebar */}
             <aside className={`owner-sidebar ${mobileOpen ? "mobile-open" : ""}`}>
-                {/* 1. Sidebar Brand Section */}
+                {/* 1. Sidebar Brand */}
                 <div className="owner-sidebar-brand" onClick={() => navigate("/dashboard")}>
                     <div className="sidebar-brand-icon-box">✨</div>
                     <div className="sidebar-brand-info">
@@ -65,7 +66,7 @@ function OwnerNavbar() {
                     </div>
                 </div>
 
-                {/* 2. Owner Profile Card inside Sidebar */}
+                {/* 2. Owner Profile Card */}
                 <div className="owner-sidebar-profile" onClick={() => navigate("/owner/profile")}>
                     <div className="sidebar-avatar-circle">{ownerInitial}</div>
                     <div className="sidebar-profile-info">
@@ -76,7 +77,7 @@ function OwnerNavbar() {
 
                 {/* 3. Vertical Navigation Menu */}
                 <nav className="owner-sidebar-nav">
-                    <span className="sidebar-section-heading">MAIN MENU</span>
+                    <span className="sidebar-section-heading">MANAGEMENT MENU</span>
                     {navItems.map((item) => {
                         const isActive = location.pathname === item.path;
                         return (
@@ -96,7 +97,7 @@ function OwnerNavbar() {
                     })}
                 </nav>
 
-                {/* 4. Bottom Sidebar Actions */}
+                {/* 4. Bottom Actions */}
                 <div className="owner-sidebar-footer">
                     <button
                         className="sidebar-customer-view-btn"

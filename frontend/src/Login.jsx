@@ -61,18 +61,25 @@ function Login() {
 
             if (res.ok) {
                 // Save user session to localStorage
+                const userRole = (data.role || "CUSTOMER").toUpperCase();
                 setUser({
                     user_id: data.user_id,
                     name: data.name || email.split("@")[0],
                     email: data.email || email,
-                    role: (data.role || "CUSTOMER").toUpperCase(),
+                    role: userRole,
                     access_token: data.access_token,
                 });
 
                 localStorage.setItem("user_id", String(data.user_id));
 
-                // Navigate directly to dashboard
-                navigate("/dashboard");
+                // Navigate directly to role-specific home
+                if (userRole === "SALON_OWNER") {
+                    navigate("/owner/dashboard");
+                } else if (userRole === "ADMIN") {
+                    navigate("/admin");
+                } else {
+                    navigate("/dashboard");
+                }
             } else {
                 setError(data.detail || "Invalid email or password.");
             }

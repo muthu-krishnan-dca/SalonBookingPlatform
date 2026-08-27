@@ -13,6 +13,7 @@ function Bookings() {
     const [filter, setFilter] = useState("ALL");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [cancellingId, setCancellingId] = useState(null);
 
     const fetchBookingsAndSalons = async () => {
         setLoading(true);
@@ -24,7 +25,7 @@ function Bookings() {
             if (!bookRes.ok) throw new Error("Failed to fetch bookings");
             const bookingsData = await bookRes.json();
 
-            // 2. Fetch Salons to map Salon ID -> Salon Details
+            // 2. Fetch Salons
             const salonRes = await fetch("http://127.0.0.1:8000/salons/");
             const map = {};
             if (salonRes.ok) {
@@ -48,31 +49,33 @@ function Bookings() {
         fetchBookingsAndSalons();
     }, []);
 
-    const handleDelete = async (bookingId) => {
-        const confirmDelete = window.confirm(`Are you sure you want to cancel/delete Booking #${bookingId}?`);
-        if (!confirmDelete) return;
+    const handleCancelBooking = async (bookingId) => {
+        const confirmCancel = window.confirm(`Are you sure you want to cancel Appointment #${bookingId}?`);
+        if (!confirmCancel) return;
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/bookings/${bookingId}`, {
-                method: "DELETE",
+            setCancellingId(bookingId);
+            const response = await fetch(`http://127.0.0.1:8000/bookings/${bookingId}/cancel`, {
+                method: "PATCH",
             });
 
             if (response.ok) {
-                alert(`Booking #${bookingId} deleted successfully!`);
-                setBookings((prev) => prev.filter((b) => b.id !== bookingId));
+                alert(`Appointment #${bookingId} has been cancelled.`);
+                fetchBookingsAndSalons();
             } else {
                 const data = await response.json();
-                alert(data.detail || "Failed to delete booking.");
+                alert(data.detail || "Failed to cancel booking.");
             }
         } catch (err) {
-            console.error("Delete error:", err);
-            alert("Error connecting to server to delete booking.");
+            console.error("Cancel error:", err);
+            alert("Error connecting to server.");
+        } finally {
+            setCancellingId(null);
         }
     };
 
     // Filter by customer if logged in, and by status
     const displayedBookings = bookings.filter((b) => {
-        // If customer is logged in, show their bookings by default unless viewing all
         if (isCust && currentUser?.user_id && filter !== "ALL_USERS") {
             if (b.customer_id !== currentUser.user_id) return false;
         }
@@ -98,7 +101,7 @@ function Bookings() {
         <div className="salons-page customer-page-with-bottom-nav">
             <div className="page-header salons-header">
                 <div>
-                    <h1>Salon Booking System</h1>
+                    <h1>Salon Booking Platform</h1>
                     <h2>📅 {isCust ? "My Appointments" : "All Customer Bookings"}</h2>
                 </div>
                 <div className="header-actions">
@@ -106,7 +109,7 @@ function Bookings() {
                         🏠 Dashboard
                     </button>
                     <button className="nav-btn primary" onClick={() => navigate("/salons")}>
-                        + Book New
+                        + Book New Appointment
                     </button>
                 </div>
             </div>
@@ -122,26 +125,23 @@ function Bookings() {
                         {f === "ALL" ? (isCust ? "My Bookings" : "All Bookings") : f}
                     </button>
                 ))}
-                {isCust && (
-                    <button
-                        className={`filter-tab ${filter === "ONLY_MINE" ? "active" : ""}`}
-                        onClick={() => setFilter("ONLY_MINE")}
-                        style={{ borderColor: "#a855f7", color: "#c084fc" }}
-                    >
-                        👤 My Bookings Only
-                    </button>
-                )}
             </div>
 
-            {loading && <p style={{ textAlign: "center", color: "#cbd5e1" }}>Loading appointments...</p>}
+            {loading && (
+                <div className="loading-state">
+                    <div className="spinner"></div>
+                    <p>Loading your appointments...</p>
+                </div>
+            )}
             {error && <div className="alert error">⚠️ {error}</div>}
 
             {!loading && displayedBookings.length === 0 && (
                 <div className="empty-state">
+                    <span className="empty-icon">📅</span>
                     <h3>No appointments found</h3>
-                    <p>There are no bookings matching the selected status.</p>
-                    <button className="card-btn" onClick={() => navigate("/salons")} style={{ maxWidth: "200px", marginTop: "15px" }}>
-                        Explore Salons & Book
+                    <p>You don't have any appointments matching this filter.</p>
+                    <button className="card-btn" onClick={() => navigate("/salons")} style={{ maxWidth: "220px", marginTop: "15px" }}>
+                        Explore Salons & Book Now
                     </button>
                 </div>
             )}
@@ -152,7 +152,7 @@ function Bookings() {
                     return (
                         <div key={booking.id} className="booking-card-item">
                             <div className="booking-card-top">
-                                <span className="booking-id-tag">Booking #{booking.id}</span>
+                                <span className="booking-id-tag">Appointment #{booking.id}</span>
                                 <span className={getStatusClass(booking.status)}>
                                     {booking.status || "PENDING"}
                                 </span>
@@ -170,20 +170,35 @@ function Bookings() {
                                 <p><strong>✂️ Service:</strong> {booking.service}</p>
                                 <p><strong>📅 Date:</strong> {booking.booking_date}</p>
                                 <p><strong>⏰ Time:</strong> {booking.booking_time}</p>
+                                {booking.price > 0 && (
+                                    <p><strong>💰 Total Price:</strong> <span style={{ color: "#34d399", fontWeight: "800" }}>₹{booking.price}</span></p>
+                                )}
                             </div>
 
                             <div className="booking-card-actions">
+                                {booking.status === "COMPLETED" ? (
+                                    <button
+                                        className="details-btn"
+                                        style={{ background: "rgba(251,191,36,0.15)", color: "#fbbf24", borderColor: "rgba(251,191,36,0.3)" }}
+                                        onClick={() => navigate(`/salons/${booking.salon_id}`)}
+                                    >
+                                        ⭐ Rate & Review
+                                    </button>
+                                ) : booking.status !== "CANCELLED" ? (
+                                    <button
+                                        className="delete-btn"
+                                        disabled={cancellingId === booking.id}
+                                        onClick={() => handleCancelBooking(booking.id)}
+                                    >
+                                        {cancellingId === booking.id ? "Cancelling..." : "✕ Cancel Slot"}
+                                    </button>
+                                ) : null}
+
                                 <button
                                     className="details-btn"
                                     onClick={() => navigate(`/bookings/${booking.id}`)}
                                 >
-                                    View Details & Edit
-                                </button>
-                                <button
-                                    className="delete-btn"
-                                    onClick={() => handleDelete(booking.id)}
-                                >
-                                    Cancel
+                                    View Details
                                 </button>
                             </div>
                         </div>
