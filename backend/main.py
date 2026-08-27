@@ -23,6 +23,21 @@ app = FastAPI(
 )
 
 from rate_limiter import RateLimiterMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import Response
+
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response: Response = await call_next(request)
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        return response
+
+# Security Headers & Hardening Middleware
+app.add_middleware(SecurityHeadersMiddleware)
 
 # Rate Limiter Middleware: Protects endpoints from abuse and brute-force attacks
 app.add_middleware(RateLimiterMiddleware, default_limit=120, window_seconds=60)
