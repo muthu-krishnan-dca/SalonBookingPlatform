@@ -6465,3 +6465,161 @@ img, svg, video {
         padding: 24px 16px;
     }
 }
+
+/* =========================================================
+   Salon Owner Profile Header & Action Buttons Row
+   ========================================================= */
+.owner-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.owner-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.owner-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.owner-salon-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+
+.owner-status-pill {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.owner-status-pill.online {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+}
+
+.owner-status-pill.offline {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #f87171;
+}
+
+.owner-branch-id-tag {
+    font-size: 12px;
+    color: #c084fc;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+/* Actions Row in a clean, perfectly aligned single line */
+.owner-header-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.edit-salon-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.edit-salon-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.edit-salon-action-btn:active {
+    transform: translateY(0);
+}
+
+/* Pause Button (Red/Muted) */
+.edit-salon-action-btn.pause-action {
+    background: rgba(239, 68, 68, 0.18);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+
+.edit-salon-action-btn.pause-action:hover {
+    background: rgba(239, 68, 68, 0.28);
+    color: #ffffff;
+}
+
+/* Resume Button (Green) */
+.edit-salon-action-btn.resume-action {
+    background: rgba(16, 185, 129, 0.18);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #6ee7b7;
+}
+
+.edit-salon-action-btn.resume-action:hover {
+    background: rgba(16, 185, 129, 0.28);
+    color: #ffffff;
+}
+
+/* Location Button (Modern Violet) */
+.edit-salon-action-btn.location-action {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.35) 0%, rgba(99, 102, 241, 0.35) 100%);
+    border-color: rgba(139, 92, 246, 0.5);
+    color: #ffffff;
+}
+
+.edit-salon-action-btn.location-action:hover {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.55) 0%, rgba(99, 102, 241, 0.55) 100%);
+    border-color: rgba(167, 139, 250, 0.8);
+}
+
+/* Edit Button (Purple / Neon Glow) */
+.edit-salon-action-btn.edit-action {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.35) 0%, rgba(236, 72, 153, 0.35) 100%);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #ffffff;
+}
+
+.edit-salon-action-btn.edit-action:hover {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.55) 0%, rgba(236, 72, 153, 0.55) 100%);
+    border-color: rgba(236, 72, 153, 0.8);
+}
+
+/* Delete Button */
+.edit-salon-action-btn.delete-action {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+
+.edit-salon-action-btn.delete-action:hover {
+    background: rgba(239, 68, 68, 0.35);
+    color: #ffffff;
+}

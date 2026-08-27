@@ -620,35 +620,21 @@ function OwnerSalon() {
                             <div className="salon-card owner-profile-card">
                                 <div className="owner-card-top">
                                     <div className="owner-header-left">
-                                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                            <h3>💈 {activeSalon.name}</h3>
-                                            <span style={{
-                                                padding: "3px 10px",
-                                                borderRadius: "12px",
-                                                fontSize: "12px",
-                                                fontWeight: "800",
-                                                background: activeSalon.is_open ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)",
-                                                border: activeSalon.is_open ? "1px solid rgba(16, 185, 129, 0.4)" : "1px solid rgba(239, 68, 68, 0.4)",
-                                                color: activeSalon.is_open ? "#34d399" : "#f87171"
-                                            }}>
+                                        <div className="owner-title-row">
+                                            <h3 className="owner-salon-title">💈 {activeSalon.name}</h3>
+                                            <span className={`owner-status-pill ${activeSalon.is_open ? "online" : "offline"}`}>
                                                 {activeSalon.is_open ? "🟢 Open / Online" : "🔴 Closed / Offline"}
                                             </span>
                                         </div>
-                                        <span style={{ fontSize: "12px", color: "#a855f7", fontWeight: "700" }}>
+                                        <span className="owner-branch-id-tag">
                                             Branch ID #{activeSalon.id}
                                         </span>
                                     </div>
 
                                     {/* Action Buttons: 1-Click Status Toggle, Set Location, Edit */}
-                                    <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                                    <div className="owner-header-actions-row">
                                         <button
-                                            className="edit-salon-action-btn"
-                                            style={{
-                                                background: activeSalon.is_open ? "rgba(239, 68, 68, 0.18)" : "rgba(16, 185, 129, 0.18)",
-                                                borderColor: activeSalon.is_open ? "rgba(239, 68, 68, 0.4)" : "rgba(16, 185, 129, 0.4)",
-                                                color: activeSalon.is_open ? "#fca5a5" : "#6ee7b7",
-                                                fontWeight: "700"
-                                            }}
+                                            className={`edit-salon-action-btn ${activeSalon.is_open ? "pause-action" : "resume-action"}`}
                                             onClick={() => handleToggleOnlineStatus(activeSalon)}
                                             disabled={statusToggling}
                                             title="1-Click Quick Toggle Online / Offline Status"
@@ -661,7 +647,7 @@ function OwnerSalon() {
                                         </button>
 
                                         <button
-                                            className="edit-salon-action-btn"
+                                            className="edit-salon-action-btn location-action"
                                             onClick={() => {
                                                 handleEditBranch(activeSalon);
                                                 handleAutoDetectGPS();
@@ -672,7 +658,7 @@ function OwnerSalon() {
                                         </button>
 
                                         <button
-                                            className="edit-salon-action-btn"
+                                            className="edit-salon-action-btn edit-action"
                                             onClick={() => handleEditBranch(activeSalon)}
                                         >
                                             ✏️ Edit Branch & Hours
@@ -680,8 +666,7 @@ function OwnerSalon() {
 
                                         {salons.length > 1 && (
                                             <button
-                                                className="edit-salon-action-btn"
-                                                style={{ background: "rgba(239, 68, 68, 0.2)", borderColor: "rgba(239, 68, 68, 0.4)", color: "#fca5a5" }}
+                                                className="edit-salon-action-btn delete-action"
                                                 onClick={() => handleDeleteBranch(activeSalon.id, activeSalon.name)}
                                                 disabled={deletingId === activeSalon.id}
                                                 title="Delete this salon branch"
