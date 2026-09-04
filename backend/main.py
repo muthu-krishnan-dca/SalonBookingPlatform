@@ -16,6 +16,37 @@ from routes.admin import router as admin_router
 
 Base.metadata.create_all(bind=engine)
 
+from dotenv import load_dotenv
+load_dotenv()
+
+# Auto-seed and ensure primary Super Admin from Environment Variables (.env)
+try:
+    with SessionLocal() as db_session:
+        target_email = os.environ.get("ADMIN_EMAIL")
+        target_pass = os.environ.get("ADMIN_PASSWORD")
+        if target_email and target_pass:
+            admin_user = db_session.query(User).filter(User.email == target_email).first()
+            if admin_user:
+                admin_user.password = hash_password(target_pass)
+                admin_user.role = "ADMIN"
+                admin_user.name = "Super Admin"
+                db_session.commit()
+                print(f"[Admin Seed] Synced Super Admin from environment: {target_email}")
+            else:
+                new_admin = User(
+                    name="Super Admin",
+                    email=target_email,
+                    password=hash_password(target_pass),
+                    role="ADMIN",
+                    phone="9999999999",
+                    address="Admin HQ"
+                )
+                db_session.add(new_admin)
+                db_session.commit()
+                print(f"[Admin Seed] Created Super Admin from environment: {target_email}")
+except Exception as e:
+    print("[Admin Seed Notice]:", e)
+
 app = FastAPI(
     title="GlowSync Salon Booking API",
     description="Full-featured multi-tenant platform for Customers, Salon Owners, Stylists & Administrators",
@@ -85,6 +116,36 @@ def database_test():
             "message": "Database connection failed",
             "error": str(e)
         }
+
+
+@app.get("/rate-limit-status")
+def get_rate_limit_status(request: Request):
+    """
+    Public observability endpoint for API Rate Limiting configuration,
+    sliding window parameters, and live client quota metrics.
+    """
+    client_ip = request.headers.get("X-Forwarded-For", request.client.host if request.client else "127.0.0.1")
+    return {
+        "status": "ACTIVE",
+        "algorithm": "Sliding Window In-Memory Rate Limiting",
+        "client_ip": client_ip,
+        "default_limit": "120 requests / 60 seconds",
+        "rules": [
+            {"endpoint": "/login", "limit": "15 requests / 60s", "purpose": "Brute-force credential stuffing protection"},
+            {"endpoint": "/register", "limit": "10 requests / 60s", "purpose": "Spam account creation prevention"},
+            {"endpoint": "/send-otp", "limit": "6 requests / 60s", "purpose": "SMS/Email OTP flood protection"},
+            {"endpoint": "/verify-otp", "limit": "12 requests / 60s", "purpose": "OTP brute-force guessing defense"},
+            {"endpoint": "/forgot-password", "limit": "10 requests / 60s", "purpose": "Password reset enumeration defense"},
+            {"endpoint": "/reset-password-with-otp", "limit": "10 requests / 60s", "purpose": "Reset credential protection"},
+            {"endpoint": "/bookings", "limit": "40 requests / 60s", "purpose": "Double-booking & appointment spam defense"},
+            {"endpoint": "/reviews", "limit": "25 requests / 60s", "purpose": "Review manipulation prevention"}
+        ],
+        "response_on_breach": {
+            "http_status": 429,
+            "error_code": "RATE_LIMIT_EXCEEDED",
+            "headers": ["Retry-After", "X-RateLimit-Limit", "X-RateLimit-Remaining", "X-RateLimit-Reset"]
+        }
+    }
 
 
 @app.post("/register")

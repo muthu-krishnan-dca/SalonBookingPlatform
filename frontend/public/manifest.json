@@ -1,0 +1,17 @@
+{
+  "short_name": "GlowSync",
+  "name": "GlowSync — Smart Salon & Stylist Booking Ecosystem",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/mobile",
+  "background_color": "#0d0918",
+  "theme_color": "#9333ea",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "Discover verified salons, book appointments with top stylists, and enjoy real-time scheduling with zero overlap guarantee."
+}

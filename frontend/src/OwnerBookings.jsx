@@ -181,6 +181,7 @@ function OwnerBookings() {
                                                     <p>📞 <strong>Phone:</strong> {customer.phone}</p>
                                                 )}
                                                 <p>✂️ <strong>Service:</strong> {b.service}</p>
+                                                <p>💈 <strong>Stylist:</strong> <span style={{ color: "#c084fc", fontWeight: "700" }}>{b.staff_name || "Any Stylist"}</span></p>
                                                 <p>📅 <strong>Date:</strong> {b.booking_date}</p>
                                                 <p>⏰ <strong>Time:</strong> {b.booking_time}</p>
                                             </div>

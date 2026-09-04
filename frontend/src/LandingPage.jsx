@@ -147,24 +147,42 @@ function LandingPage() {
                     <button
                         className="card-btn"
                         onClick={() => navigate("/salons")}
-                        style={{ padding: "14px 32px", fontSize: "16px" }}
+                        style={{ padding: "14px 30px", fontSize: "15.5px" }}
                     >
                         💇 Explore Salons & Book Now →
                     </button>
                     <button
-                        onClick={() => navigate("/register")}
+                        onClick={() => navigate("/mobile")}
                         style={{
-                            padding: "14px 28px",
+                            padding: "14px 26px",
                             borderRadius: "14px",
-                            background: "rgba(255,255,255,0.06)",
-                            border: "1px solid rgba(255,255,255,0.18)",
+                            background: "linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(56, 189, 248, 0.25) 100%)",
+                            border: "1px solid rgba(192, 132, 252, 0.5)",
                             color: "#ffffff",
                             fontWeight: "800",
                             fontSize: "15px",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px"
+                        }}
+                    >
+                        <span>📱</span> Try Mobile App Flow
+                    </button>
+                    <button
+                        onClick={() => navigate("/register")}
+                        style={{
+                            padding: "14px 24px",
+                            borderRadius: "14px",
+                            background: "rgba(255,255,255,0.06)",
+                            border: "1px solid rgba(255,255,255,0.18)",
+                            color: "#cbd5e1",
+                            fontWeight: "700",
+                            fontSize: "14px",
                             cursor: "pointer"
                         }}
                     >
-                        💈 Register Your Salon Shop
+                        💈 Register Salon
                     </button>
                 </div>
 
@@ -230,30 +248,6 @@ function LandingPage() {
                         <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>Double-Booking Guard</h3>
                         <p style={{ color: "#94a3b8", fontSize: "13.5px", lineHeight: "1.5" }}>
                             Our real-time backend engine locks open slots and tracks staff leaves to eliminate double-booking errors.
-                        </p>
-                    </div>
-
-                    <div style={{ background: "#1c1630", borderRadius: "22px", padding: "26px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                        <div style={{ fontSize: "32px", marginBottom: "14px" }}>⚡</div>
-                        <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>1-Click Store Hours & Toggle</h3>
-                        <p style={{ color: "#94a3b8", fontSize: "13.5px", lineHeight: "1.5" }}>
-                            Salon owners can pause bookings or set daily business operating hours in 1 click.
-                        </p>
-                    </div>
-
-                    <div style={{ background: "#1c1630", borderRadius: "22px", padding: "26px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                        <div style={{ fontSize: "32px", marginBottom: "14px" }}>📱</div>
-                        <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>Instagram-Style Mobile App</h3>
-                        <p style={{ color: "#94a3b8", fontSize: "13.5px", lineHeight: "1.5" }}>
-                            Neumorphic dark UI with smooth bottom navigation and interactive video showcase.
-                        </p>
-                    </div>
-
-                    <div style={{ background: "#1c1630", borderRadius: "22px", padding: "26px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                        <div style={{ fontSize: "32px", marginBottom: "14px" }}>👑</div>
-                        <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>Platform Admin Control</h3>
-                        <p style={{ color: "#94a3b8", fontSize: "13.5px", lineHeight: "1.5" }}>
-                            Enterprise analytics, role management, review moderation, and salon verification tools.
                         </p>
                     </div>
                 </div>

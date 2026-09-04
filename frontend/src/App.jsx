@@ -23,38 +23,25 @@ import OwnerCustomers from "./OwnerCustomers";
 import OwnerProfile from "./OwnerProfile";
 import AdminDashboard from "./AdminDashboard";
 import CustomerProfile from "./CustomerProfile";
+import MobileSimulator from "./MobileSimulator";
 import ProtectedRoute from "./ProtectedRoute";
 import { getUser } from "./auth";
-
-// Smart root handler that directs visitors to Login by default, or to their role's dashboard if already logged in
-function RootRedirect() {
-  const user = getUser();
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-  if (user.role === "SALON_OWNER") {
-    return <Navigate to="/owner/dashboard" replace />;
-  }
-  if (user.role === "ADMIN") {
-    return <Navigate to="/admin" replace />;
-  }
-  return <Navigate to="/dashboard" replace />;
-}
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Root Route: Defaults to Login / Register if unauthenticated, or Role Dashboard if logged in */}
-        <Route path="/" element={<RootRedirect />} />
+        {/* Root Route: Shows Public Marketing Landing Page */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/landing" element={<LandingPage />} />
+
+        {/* Dedicated Customer Mobile App Simulator Flow */}
+        <Route path="/mobile" element={<MobileSimulator />} />
 
         {/* Public Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
-        {/* Marketing / Landing Page */}
-        <Route path="/landing" element={<LandingPage />} />
 
         {/* Customer Profile */}
         <Route
@@ -232,7 +219,7 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute allowedRoles={["ADMIN", "SALON_OWNER", "CUSTOMER"]}>
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
               <AdminDashboard />
             </ProtectedRoute>
           }

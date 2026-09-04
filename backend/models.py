@@ -103,6 +103,11 @@ class Booking(Base):
     salon = relationship("Salon", back_populates="bookings")
     staff = relationship("Staff", back_populates="bookings")
 
+    @property
+    def staff_name(self):
+        return self.staff.name if self.staff else None
+
+
 
 class Review(Base):
     __tablename__ = "reviews"

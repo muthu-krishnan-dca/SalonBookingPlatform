@@ -270,6 +270,7 @@ function OwnerDashboard() {
                                         <th>ID</th>
                                         <th>Customer</th>
                                         <th>Service</th>
+                                        <th>Stylist</th>
                                         <th>Date & Time</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -292,6 +293,11 @@ function OwnerDashboard() {
                                                     </div>
                                                 </td>
                                                 <td>{b.service}</td>
+                                                <td>
+                                                    <span style={{ color: "#c084fc", fontWeight: "700", fontSize: "12.5px" }}>
+                                                        💈 {b.staff_name || "Any Stylist"}
+                                                    </span>
+                                                </td>
                                                 <td>{b.booking_date} at {b.booking_time}</td>
                                                 <td>
                                                     <span className={getStatusClass(b.status)}>

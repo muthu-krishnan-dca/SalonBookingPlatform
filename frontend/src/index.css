@@ -9,7 +9,7 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
   font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #0f172a;
+  background: #142036;
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
@@ -31,13 +31,7 @@ img, svg, video {
   width: 100%;
   max-width: 100vw;
   padding: 40px 20px;
-  background: 
-    linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(76, 29, 149, 0.80) 50%, rgba(15, 23, 42, 0.92) 100%),
-    url('/salon-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #dededf 0%, #e5e2ec 50%, #efedf7 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,13 +222,7 @@ img, svg, video {
 .salons-page {
     min-height: 100vh;
     padding: 40px 20px;
-    background: 
-        linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(76, 29, 149, 0.80) 50%, rgba(15, 23, 42, 0.92) 100%),
-        url('/salon-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #0b0816 0%, #170f2b 50%, #0d091a 100%);
     box-sizing: border-box;
 }
 
@@ -1781,13 +1769,7 @@ img, svg, video {
 .auth-page {
     min-height: 100vh;
     padding: 20px 15px;
-    background: 
-        linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(76, 29, 149, 0.82) 50%, rgba(15, 23, 42, 0.92) 100%),
-        url('/salon-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #0b0816 0%, #170f2b 50%, #0d091a 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2603,13 +2585,7 @@ img, svg, video {
 
 .owner-layout {
     min-height: 100vh;
-    background: 
-        linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(76, 29, 149, 0.80) 50%, rgba(15, 23, 42, 0.92) 100%),
-        url('/salon-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #0b0816 0%, #170f2b 50%, #0d091a 100%);
     box-sizing: border-box;
 }
 
@@ -4601,29 +4577,38 @@ img, svg, video {
         0 0 25px rgba(168, 85, 247, 0.35);
 }
 
-.story-image-wrapper {
+.story-gradient-banner {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 140px;
+    background: linear-gradient(135deg, #24163f 0%, #150d27 50%, #0d0818 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px;
     overflow: hidden;
 }
 
-.story-banner-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.5s ease;
-}
-
-.mobile-salon-story-card:hover .story-banner-img {
-    transform: scale(1.05);
-}
-
-.story-overlay-gradient {
+.story-gradient-banner::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(36, 30, 56, 0.95) 100%);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 70% 30%, rgba(168, 85, 247, 0.25) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.story-banner-decor {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    font-size: 28px;
+    opacity: 0.6;
+    margin-top: auto;
+    filter: drop-shadow(0 4px 12px rgba(168, 85, 247, 0.4));
 }
 
 .story-floating-tags {
@@ -4933,12 +4918,7 @@ img, svg, video {
 .owner-layout {
     display: flex;
     min-height: 100vh;
-    background: 
-        linear-gradient(135deg, rgba(16, 11, 30, 0.95) 0%, rgba(23, 17, 43, 0.92) 50%, rgba(13, 9, 24, 0.96) 100%),
-        url('/salon-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #0b0816 0%, #170f2b 50%, #0d091a 100%);
 }
 
 /* Mobile topbar hidden by default on Desktop */
@@ -5350,10 +5330,7 @@ img, svg, video {
 .admin-spandle-layout.liquid-glass-theme.ultra-liquid {
     display: flex;
     min-height: 100vh;
-    background: 
-        linear-gradient(135deg, rgba(8, 4, 18, 0.88) 0%, rgba(14, 8, 28, 0.82) 50%, rgba(6, 3, 14, 0.92) 100%),
-        url('/luxury-salon-bg.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background: linear-gradient(135deg, #070312 0%, #0e071c 50%, #05020d 100%);
     position: relative;
     overflow-x: hidden;
     color: #ffffff;
@@ -6622,4 +6599,31 @@ img, svg, video {
 .edit-salon-action-btn.delete-action:hover {
     background: rgba(239, 68, 68, 0.35);
     color: #ffffff;
+}
+
+/* Admin Dashboard Staff & Service Badges */
+.spec-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(192, 132, 252, 0.15);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    color: #e9d5ff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.category-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #bae6fd;
+    font-size: 12px;
+    font-weight: 700;
 }

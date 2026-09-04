@@ -13,7 +13,6 @@ const SALON_SHOWCASE_SCENES = [
         title: "Precision Scissor Craft & Modern Fades",
         subtitle: "Tailored to your facial contours by certified styling masters.",
         quote: "“The best fade & styling experience in town!”",
-        bgImage: "/mobile-salon-hero.jpg",
         accent: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
         floatingTag: "✂️ Master Barber Certified",
         stats: "15,000+ Styles Crafted"
@@ -26,7 +25,6 @@ const SALON_SHOWCASE_SCENES = [
         title: "Rejuvenating Moroccan Scalp & Hair Spa",
         subtitle: "Therapeutic hot-towel steam, botanical oils, and nourishing scalp therapy.",
         quote: "“Total stress relief and intensely soft hair.”",
-        bgImage: "/salons-bg.jpg",
         accent: "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
         floatingTag: "🍃 100% Organic Products",
         stats: "99.4% Client Satisfaction"
@@ -39,7 +37,6 @@ const SALON_SHOWCASE_SCENES = [
         title: "Master Beard Sculpting & Razor Finish",
         subtitle: "Crisp line-ups, botanical beard butter conditioning, and hot-towel treatment.",
         quote: "“Sharp look with unmatched precision.”",
-        bgImage: "/salon-bg.jpg",
         accent: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
         floatingTag: "⚡ Razor-Sharp Edge",
         stats: "Over 8,000 Happy Beards"
@@ -52,7 +49,6 @@ const SALON_SHOWCASE_SCENES = [
         title: "Radiant Gold Glow Facial & Cleanup",
         subtitle: "Deep ultrasonic pore detox, skin hydration, and youthful radiance boost.",
         quote: "“Instant natural glow that lasts for weeks!”",
-        bgImage: "/mobile-salon-hero.jpg",
         accent: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
         floatingTag: "✨ Instant Radiance & Detox",
         stats: "Rated 4.98 / 5.0"
@@ -190,7 +186,7 @@ function Dashboard() {
                 <div
                     className="showcase-screen-card"
                     style={{
-                        backgroundImage: `linear-gradient(180deg, rgba(16, 12, 28, 0.4) 0%, rgba(10, 7, 20, 0.92) 100%), url(${currentScene.bgImage})`
+                        background: "linear-gradient(145deg, #18122c 0%, #0d091a 100%)"
                     }}
                 >
                     {/* Animated Light Sweeps & Glowing Aura */}
@@ -295,16 +291,15 @@ function Dashboard() {
 
             {/* Mobile Salon Showcase Card with Image & Content (Only on Phone screens) */}
             <div className="mobile-salon-story-card mobile-only-home-feed" onClick={() => navigate("/salons")}>
-                <div className="story-image-wrapper">
-                    <img
-                        src="/mobile-salon-hero.jpg"
-                        alt="Luxury Beauty Salon Interior"
-                        className="story-banner-img"
-                    />
-                    <div className="story-overlay-gradient" />
+                <div className="story-gradient-banner">
                     <div className="story-floating-tags">
                         <span className="story-tag glow">⭐ 4.9 Top Rated</span>
                         <span className="story-tag">🌿 Luxury Spa & Styling</span>
+                    </div>
+                    <div className="story-banner-decor">
+                        <span className="decor-icon">✨</span>
+                        <span className="decor-icon">💇‍♀️</span>
+                        <span className="decor-icon">💈</span>
                     </div>
                 </div>
                 <div className="story-content-box">

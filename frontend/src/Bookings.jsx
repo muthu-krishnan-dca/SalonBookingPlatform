@@ -168,6 +168,7 @@ function Bookings() {
                                     </p>
                                 )}
                                 <p><strong>✂️ Service:</strong> {booking.service}</p>
+                                <p><strong>💈 Stylist:</strong> <span style={{ color: "#c084fc", fontWeight: "700" }}>{booking.staff_name || "Any Stylist"}</span></p>
                                 <p><strong>📅 Date:</strong> {booking.booking_date}</p>
                                 <p><strong>⏰ Time:</strong> {booking.booking_time}</p>
                                 {booking.price > 0 && (

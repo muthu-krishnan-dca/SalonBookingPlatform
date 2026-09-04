@@ -44,3 +44,13 @@ export const isSalonOwner = () => {
 export const isCustomer = () => {
     return getUserRole() === "CUSTOMER";
 };
+
+export const isAdmin = () => {
+    return getUserRole() === "ADMIN";
+};
+
+export const getToken = () => {
+    const user = getUser();
+    return user?.access_token || "";
+};
+

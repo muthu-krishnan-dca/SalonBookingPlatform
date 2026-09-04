@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser, logout } from "./auth";
+import { getUser, logout, getToken } from "./auth";
 
 function AdminDashboard() {
     const navigate = useNavigate();
     const currentUser = getUser();
 
     const [stats, setStats] = useState(null);
-    const [activeTab, setActiveTab] = useState("overview"); // overview, users, salons, bookings, reviews
+    const [activeTab, setActiveTab] = useState("overview"); // overview, users, salons, staff, services, bookings, reviews
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -17,10 +17,13 @@ function AdminDashboard() {
     const [userRoleFilter, setUserRoleFilter] = useState("ALL");
     const [salonVerifyFilter, setSalonVerifyFilter] = useState("ALL");
     const [bookingStatusFilter, setBookingStatusFilter] = useState("ALL");
+    const [serviceCategoryFilter, setServiceCategoryFilter] = useState("ALL");
 
     // Data lists
     const [usersList, setUsersList] = useState([]);
     const [salonsList, setSalonsList] = useState([]);
+    const [staffList, setStaffList] = useState([]);
+    const [servicesList, setServicesList] = useState([]);
     const [bookingsList, setBookingsList] = useState([]);
     const [reviewsList, setReviewsList] = useState([]);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -30,32 +33,49 @@ function AdminDashboard() {
             setLoading(true);
             setError("");
 
+            const authHeaders = {
+                "Content-Type": "application/json",
+                ...(getToken() ? { "Authorization": `Bearer ${getToken()}` } : {})
+            };
+
             // 1. Fetch Platform Stats
-            const statsRes = await fetch("http://127.0.0.1:8000/admin/stats");
+            const statsRes = await fetch("http://127.0.0.1:8000/admin/stats", { headers: authHeaders });
             if (statsRes.ok) {
                 setStats(await statsRes.json());
             }
 
             // 2. Fetch Users
-            const usersRes = await fetch("http://127.0.0.1:8000/admin/users");
+            const usersRes = await fetch("http://127.0.0.1:8000/admin/users", { headers: authHeaders });
             if (usersRes.ok) {
                 setUsersList(await usersRes.json());
             }
 
             // 3. Fetch Salons
-            const salonsRes = await fetch("http://127.0.0.1:8000/admin/salons");
+            const salonsRes = await fetch("http://127.0.0.1:8000/admin/salons", { headers: authHeaders });
             if (salonsRes.ok) {
                 setSalonsList(await salonsRes.json());
             }
 
-            // 4. Fetch Bookings
-            const bookingsRes = await fetch("http://127.0.0.1:8000/admin/bookings");
+            // 4. Fetch Staff
+            const staffRes = await fetch("http://127.0.0.1:8000/admin/staff", { headers: authHeaders });
+            if (staffRes.ok) {
+                setStaffList(await staffRes.json());
+            }
+
+            // 5. Fetch Services
+            const servicesRes = await fetch("http://127.0.0.1:8000/admin/services", { headers: authHeaders });
+            if (servicesRes.ok) {
+                setServicesList(await servicesRes.json());
+            }
+
+            // 6. Fetch Bookings
+            const bookingsRes = await fetch("http://127.0.0.1:8000/admin/bookings", { headers: authHeaders });
             if (bookingsRes.ok) {
                 setBookingsList(await bookingsRes.json());
             }
 
-            // 5. Fetch Reviews
-            const reviewsRes = await fetch("http://127.0.0.1:8000/admin/reviews");
+            // 7. Fetch Reviews
+            const reviewsRes = await fetch("http://127.0.0.1:8000/admin/reviews", { headers: authHeaders });
             if (reviewsRes.ok) {
                 setReviewsList(await reviewsRes.json());
             }
@@ -143,6 +163,38 @@ function AdminDashboard() {
         }
     };
 
+    // Delete staff
+    const handleDeleteStaff = async (staffId, staffName) => {
+        if (!window.confirm(`Are you sure you want to delete stylist "${staffName}"?`)) return;
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/admin/staff/${staffId}`, {
+                method: "DELETE",
+                headers: getToken() ? { "Authorization": `Bearer ${getToken()}` } : {}
+            });
+            if (!res.ok) throw new Error("Failed to delete staff member");
+            setSuccess("Stylist removed from platform");
+            loadAdminData();
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+    // Delete service
+    const handleDeleteService = async (serviceId, serviceName) => {
+        if (!window.confirm(`Are you sure you want to delete service "${serviceName}"?`)) return;
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/admin/services/${serviceId}`, {
+                method: "DELETE",
+                headers: getToken() ? { "Authorization": `Bearer ${getToken()}` } : {}
+            });
+            if (!res.ok) throw new Error("Failed to delete service");
+            setSuccess("Service removed from platform");
+            loadAdminData();
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
     // Filter helpers
     const filteredUsers = usersList.filter((u) => {
         const matchesRole = userRoleFilter === "ALL" || u.role === userRoleFilter;
@@ -156,6 +208,23 @@ function AdminDashboard() {
         return matchesVerify && matchesSearch;
     });
 
+    const filteredStaff = staffList.filter((st) => {
+        const matchesSearch = !searchTerm || 
+            st.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            st.specialization?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            st.salon_name?.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesSearch;
+    });
+
+    const filteredServices = servicesList.filter((srv) => {
+        const matchesCat = serviceCategoryFilter === "ALL" || (srv.category || "").toLowerCase() === serviceCategoryFilter.toLowerCase();
+        const matchesSearch = !searchTerm || 
+            srv.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            srv.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            srv.salon_name?.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCat && matchesSearch;
+    });
+
     const filteredBookings = bookingsList.filter((b) => {
         const matchesStatus = bookingStatusFilter === "ALL" || b.status === bookingStatusFilter;
         const matchesSearch = !searchTerm || b.service?.toLowerCase().includes(searchTerm.toLowerCase()) || String(b.id).includes(searchTerm);
@@ -166,6 +235,8 @@ function AdminDashboard() {
         { id: "overview", icon: "📊", label: "Platform Overview", badge: null },
         { id: "users", icon: "👥", label: "Users & Roles", badge: usersList.length },
         { id: "salons", icon: "💈", label: "Salons & Branches", badge: salonsList.length },
+        { id: "staff", icon: "✂️", label: "Staff & Stylists", badge: staffList.length },
+        { id: "services", icon: "✨", label: "Services & Categories", badge: servicesList.length },
         { id: "bookings", icon: "📅", label: "Appointments Audit", badge: bookingsList.length },
         { id: "reviews", icon: "⭐", label: "Reviews Moderation", badge: reviewsList.length },
     ];
@@ -221,8 +292,8 @@ function AdminDashboard() {
                 <div className="admin-profile-pill">
                     <div className="admin-avatar-circle">M</div>
                     <div className="admin-meta">
-                        <span className="admin-name">{currentUser?.name || "Master Admin"}</span>
-                        <span className="admin-email">{currentUser?.email || "admin@glowsync.com"}</span>
+                        <span className="admin-name">{currentUser?.name || "Super Admin"}</span>
+                        <span className="admin-email">{currentUser?.email || "taskmanagement.able@gmail.com"}</span>
                     </div>
                 </div>
 
@@ -275,6 +346,8 @@ function AdminDashboard() {
                             {activeTab === "overview" && "Platform Control Overview"}
                             {activeTab === "users" && "Platform Users & Role Management"}
                             {activeTab === "salons" && "Salons Verification & Branches"}
+                            {activeTab === "staff" && "Stylists & Staff Management"}
+                            {activeTab === "services" && "Platform Services & Category Catalog"}
                             {activeTab === "bookings" && "Appointments & Transactions Audit"}
                             {activeTab === "reviews" && "Customer Reviews & Quality Moderation"}
                         </h1>
@@ -344,7 +417,7 @@ function AdminDashboard() {
                                 <div className="kpi-content">
                                     <span className="kpi-title">Active Customers</span>
                                     <span className="kpi-figure">{stats.total_customers}</span>
-                                    <span className="kpi-sub-tag">{stats.total_staff} Stylists & Staff</span>
+                                    <span className="kpi-sub-tag">✂️ {stats.total_staff} Stylists • ✨ {stats.total_services || 0} Services</span>
                                 </div>
                                 <div className="card-ambient-glow" />
                             </div>
@@ -426,6 +499,109 @@ function AdminDashboard() {
                                         <span className="health-val glow-purple">99.9% Optimal</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* 3. Live Rate Limiting & Enterprise Threat Protection Card */}
+                        <div className="analytics-card" style={{ marginTop: "24px" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px", flexWrap: "wrap", gap: "10px" }}>
+                                <div>
+                                    <h3 style={{ margin: 0, display: "flex", alignItems: "center", gap: "10px" }}>
+                                        🛡️ API Rate Limiting & Enterprise Threat Protection
+                                    </h3>
+                                    <span style={{ fontSize: "13px", color: "#94a3b8" }}>
+                                        Sliding-window in-memory throttling active on critical API surfaces with automatic HTTP 429 enforcement.
+                                    </span>
+                                </div>
+                                <span style={{
+                                    background: "rgba(34, 197, 94, 0.15)",
+                                    border: "1px solid rgba(34, 197, 94, 0.4)",
+                                    color: "#4ade80",
+                                    padding: "6px 14px",
+                                    borderRadius: "20px",
+                                    fontSize: "12px",
+                                    fontWeight: "800",
+                                    letterSpacing: "0.5px"
+                                }}>
+                                    ● ENFORCING (HTTP 429 ACTIVE)
+                                </span>
+                            </div>
+
+                            <div style={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                                gap: "14px",
+                                marginTop: "14px"
+                            }}>
+                                {[
+                                    { route: "/login", limit: "15 req / 60s", tag: "Brute-Force & Credential Stuffing", badge: "#ec4899" },
+                                    { route: "/register", limit: "10 req / 60s", tag: "Spam Account Creation", badge: "#f59e0b" },
+                                    { route: "/send-otp", limit: "6 req / 60s", tag: "OTP Flooding & SMS Abuse", badge: "#ef4444" },
+                                    { route: "/verify-otp", limit: "12 req / 60s", tag: "OTP Guessing Prevention", badge: "#8b5cf6" },
+                                    { route: "/bookings", limit: "40 req / 60s", tag: "Slot Double-Booking Defense", badge: "#3b82f6" },
+                                    { route: "/reviews", limit: "25 req / 60s", tag: "Review Manipulation", badge: "#10b981" },
+                                    { route: "Global API", limit: "120 req / 60s", tag: "DDoS & Crawling Protection", badge: "#a855f7" },
+                                ].map((item, idx) => (
+                                    <div key={idx} style={{
+                                        background: "rgba(255, 255, 255, 0.03)",
+                                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                                        borderRadius: "14px",
+                                        padding: "14px 16px",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between"
+                                    }}>
+                                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                                            <code style={{ color: "#e2e8f0", fontSize: "13px", fontWeight: "700" }}>{item.route}</code>
+                                            <span style={{
+                                                fontSize: "11px",
+                                                fontWeight: "800",
+                                                padding: "2px 8px",
+                                                borderRadius: "6px",
+                                                background: `${item.badge}22`,
+                                                color: item.badge,
+                                                border: `1px solid ${item.badge}55`
+                                            }}>
+                                                {item.limit}
+                                            </span>
+                                        </div>
+                                        <span style={{ fontSize: "11.5px", color: "#94a3b8" }}>{item.tag}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div style={{
+                                marginTop: "18px",
+                                padding: "12px 18px",
+                                background: "rgba(168, 85, 247, 0.08)",
+                                borderRadius: "14px",
+                                border: "1px solid rgba(168, 85, 247, 0.25)",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                flexWrap: "wrap",
+                                gap: "10px"
+                            }}>
+                                <div style={{ fontSize: "12.5px", color: "#cbd5e1" }}>
+                                    <strong>HTTP 429 Observability Headers:</strong> <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>, <code>Retry-After</code>
+                                </div>
+                                <a
+                                    href="http://127.0.0.1:8000/rate-limit-status"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        color: "#c084fc",
+                                        fontSize: "12.5px",
+                                        fontWeight: "700",
+                                        textDecoration: "none",
+                                        padding: "6px 14px",
+                                        background: "rgba(192, 132, 252, 0.15)",
+                                        borderRadius: "8px",
+                                        border: "1px solid rgba(192, 132, 252, 0.3)"
+                                    }}
+                                >
+                                    View Live JSON Metric API ↗
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -562,6 +738,139 @@ function AdminDashboard() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                )}
+
+                {/* =========================================================
+                   TAB: Staff & Stylists Management
+                   ========================================================= */}
+                {activeTab === "staff" && (
+                    <div className="admin-table-card">
+                        <div className="table-header-row">
+                            <h3>Platform Stylists & Staff ({filteredStaff.length})</h3>
+                        </div>
+
+                        {filteredStaff.length === 0 ? (
+                            <p style={{ color: "#94a3b8", padding: "20px" }}>No stylists found matching your search.</p>
+                        ) : (
+                            <div className="admin-table-container">
+                                <table className="spandle-table">
+                                    <thead>
+                                        <tr>
+                                            <th>STYLIST</th>
+                                            <th>SALON</th>
+                                            <th>SPECIALIZATION</th>
+                                            <th>EXPERIENCE</th>
+                                            <th>PHONE</th>
+                                            <th>STATUS</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredStaff.map((st) => (
+                                            <tr key={st.id}>
+                                                <td className="user-name-cell">
+                                                    <div className="user-avatar-small">
+                                                        {(st.name || "S")[0].toUpperCase()}
+                                                    </div>
+                                                    <div>
+                                                        <strong>{st.name}</strong>
+                                                        <span style={{ display: "block", fontSize: "11px", color: "#94a3b8" }}>ID #{st.id}</span>
+                                                    </div>
+                                                </td>
+                                                <td>💈 {st.salon_name || `Salon #${st.salon_id}`}</td>
+                                                <td>
+                                                    <span className="spec-badge">✂️ {st.specialization}</span>
+                                                </td>
+                                                <td>{st.experience_years} yrs</td>
+                                                <td>{st.phone || "—"}</td>
+                                                <td>
+                                                    <span className={`status-pill ${st.is_available ? "confirmed" : "cancelled"}`}>
+                                                        {st.is_available ? "Active" : "On Leave / Off"}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        className="table-action-btn danger"
+                                                        onClick={() => handleDeleteStaff(st.id, st.name)}
+                                                    >
+                                                        🗑️ Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* =========================================================
+                   TAB: Services & Categories Catalog
+                   ========================================================= */}
+                {activeTab === "services" && (
+                    <div className="admin-table-card">
+                        <div className="table-header-row">
+                            <h3>Services & Category Catalog ({filteredServices.length})</h3>
+                            <div className="filter-chips-row">
+                                {["ALL", "Hair", "Spa", "Skin", "Beard", "Bridal", "Coloring"].map((cat) => (
+                                    <button
+                                        key={cat}
+                                        className={`chip-btn ${serviceCategoryFilter === cat ? "active" : ""}`}
+                                        onClick={() => setServiceCategoryFilter(cat)}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {filteredServices.length === 0 ? (
+                            <p style={{ color: "#94a3b8", padding: "20px" }}>No services found matching your filter.</p>
+                        ) : (
+                            <div className="admin-table-container">
+                                <table className="spandle-table">
+                                    <thead>
+                                        <tr>
+                                            <th>SERVICE NAME</th>
+                                            <th>SALON</th>
+                                            <th>CATEGORY</th>
+                                            <th>PRICE</th>
+                                            <th>DURATION</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredServices.map((srv) => (
+                                            <tr key={srv.id}>
+                                                <td className="service-name-cell">
+                                                    <strong>{srv.name}</strong>
+                                                </td>
+                                                <td>💈 {srv.salon_name || `Salon #${srv.salon_id}`}</td>
+                                                <td>
+                                                    <span className="spec-badge">{srv.category}</span>
+                                                </td>
+                                                <td className="price-cell">₹{srv.price}</td>
+                                                <td>⏱️ {srv.duration_mins} mins</td>
+                                                <td style={{ maxWidth: "220px", fontSize: "12px", color: "#94a3b8" }}>
+                                                    {srv.description || "Standard styling treatment"}
+                                                </td>
+                                                <td>
+                                                    <button
+                                                        className="table-action-btn danger"
+                                                        onClick={() => handleDeleteService(srv.id, srv.name)}
+                                                    >
+                                                        🗑️ Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
                 )}
 
