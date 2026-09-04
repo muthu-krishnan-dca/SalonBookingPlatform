@@ -17,18 +17,7 @@ Built with a high-performance **FastAPI (Python)** backend and an ultra-responsi
 | **5. Admin Dashboard** | `http://localhost:5173/admin` | Platform Super-Admin & Salon Owner Management Portals |
 | **6. API Documentation** | `http://localhost:8000/docs` & `/redoc` | Interactive Swagger UI and ReDoc OpenAPI documentation |
 | **7. README & Setup Guide** | `README.md` (This file) | Architecture, technical decisions & step-by-step setup |
-| **8. Demo Credentials** | *See table below* | Verified accounts for Admin, Owner, and Customer roles |
-
----
-
-## 🔑 Demo Credentials
-
-| Role | Email | Password | Access Portal |
-| :--- | :--- | :--- | :--- |
-| 🛡️ **Super Admin** | `taskmanagement.able@gmail.com` | `muthukrishnanshinysugila192746` | `/admin` |
-| 🛡️ **Admin (Alternative)** | `admin@glowsync.com` | `admin123` | `/admin` |
-| 💈 **Salon Owner** | `bobbykrishb@gmail.com` | `owner123` | `/owner/dashboard` |
-| 👤 **Customer** | `muthukrishna.cs05@gmail.com` | `customer123` | `/dashboard` or `/mobile` |
+| **8. Demo Credentials** | *Provided via submission notes* | Verified accounts for Admin, Owner, and Customer roles |
 
 ---
 
